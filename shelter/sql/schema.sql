@@ -121,7 +121,6 @@ CREATE TABLE Donations (
 CREATE TABLE Waitlist (
   waitlist_id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
-  expected_start_date DATE,
   request_date DATE NOT NULL,
   status ENUM('Waiting','Offered','Accepted','Cancelled') DEFAULT 'Waiting',
   notes VARCHAR(255),

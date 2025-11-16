@@ -1,4 +1,3 @@
--- Sample Data for Shelter Management System
 USE shelter_db;
 
 -- Insert Users (password is 'password123' hashed with PASSWORD())
@@ -114,12 +113,12 @@ INSERT INTO Donations (donation_id, donation_type, amount, in_kind_details, dona
 (8, 'Clothing', NULL, 'Shoes (12 pairs)', '2025-11-08', 13);
 
 -- Insert Waitlist
-INSERT INTO Waitlist (waitlist_id, user_id, expected_start_date, request_date, status, notes) VALUES
-(1, 13, '2025-11-15', '2025-10-25', 'Accepted', 'Offered bed at East End Shelter; moved into ro...'),
-(2, 11, '2025-11-18', '2025-10-27', 'Waiting', 'Prefers Downtown Shelter'),
-(3, 12, '2025-11-19', '2025-10-28', 'Waiting', 'Flexible on location'),
-(4, 14, '2025-11-21', '2025-10-29', 'Waiting', 'Needs access to transit'),
-(5, 15, '2025-11-23', '2025-10-30', 'Waiting', 'Referred by community worker'),
-(6, 11, '2025-11-25', '2025-11-02', 'Waiting', 'Updated request for later date'),
-(7, 12, '2025-11-27', '2025-11-03', 'Waiting', 'Still interested, can wait'),
-(8, 15, '2025-11-29', '2025-11-04', 'Cancelled', 'Found alternative housing');
+INSERT INTO Waitlist (waitlist_id, user_id, request_date, status, notes) VALUES
+(1, 13, '2025-10-25', 'Accepted', 'Offered bed at East End Shelter; moved into ro...'),
+(2, 11, '2025-10-27', 'Waiting', 'Prefers Downtown Shelter'),
+(3, 12, '2025-10-28', 'Waiting', 'Flexible on location'),
+(4, 14, '2025-10-29', 'Waiting', 'Needs access to transit'),
+(5, 15, '2025-10-30', 'Waiting', 'Referred by community worker'),
+(6, 11, '2025-11-02', 'Waiting', 'Updated request for later date'),
+(7, 12, '2025-11-03', 'Waiting', 'Still interested, can wait'),
+(8, 15, '2025-11-04', 'Cancelled', 'Found alternative housing');
