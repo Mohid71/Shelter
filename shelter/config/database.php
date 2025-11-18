@@ -8,8 +8,8 @@
 // Database connection settings
 define('DB_HOST', 'localhost');        // Usually 'localhost' for WAMP
 define('DB_USER', 'root');             // Default WAMP username
-define('DB_PASS', 'BabarAzam56');                 // Default WAMP password (empty)
-define('DB_NAME', 'shelter');       // Database name
+define('DB_PASS', '');                 // Default WAMP password (empty)
+define('DB_NAME', 'shelter_db');       // Database name
 
 // Create database connection
 function getDbConnection() {
