@@ -8,7 +8,7 @@
 // Database connection settings
 define('DB_HOST', 'localhost');        // Usually 'localhost' for WAMP
 define('DB_USER', 'root');             // Default WAMP username
-define('DB_PASS', 'Unlockme-5671');                 // Default WAMP password (empty)
+define('DB_PASS', 'BabarAzam56');                 // Default WAMP password (empty)
 define('DB_NAME', 'shelter');       // Database name
 
 // Create database connection
@@ -91,8 +91,5 @@ function fetchOne($query, $params = []) {
 }
 
 // Helper function to escape strings
-function escapeString($string) {
-    $conn = getDbConnection();
-    return $conn->real_escape_string($string);
-}
+
 ?>

@@ -8,18 +8,20 @@ require_once __DIR__ . '/../config/database.php';
 
 // ============ VIEW FUNCTIONS ============
 
-function getResidentMealDetails() {
-    $query = "SELECT * FROM ResidentMealDetails ORDER BY last_name, first_name, meal_date";
+// NEW:
+function getBedAssignmentDetails() {
+    $query = "SELECT * FROM BedAssignmentDetails ORDER BY shelter_name, room_label";
     return fetchAll($query);
 }
 
-function getSheltersAboveCityMoneyDonation() {
-    $query = "SELECT * FROM SheltersAboveCityMoneyDonation ORDER BY city, total_money_donations DESC";
+// NEW:
+function getSheltersAboveAverageDonations() {
+    $query = "SELECT * FROM SheltersAboveAverageDonations ORDER BY total_donations DESC";
     return fetchAll($query);
 }
 
-function getResidentsWithManyNoShows() {
-    $query = "SELECT * FROM ResidentsWithManyNoShows ORDER BY no_show_count DESC, last_name";
+function getResidentsWithNoShows() {
+    $query = "SELECT * FROM ResidentsWithNoShows ORDER BY no_show_count DESC, last_name, first_name";
     return fetchAll($query);
 }
 
@@ -269,29 +271,35 @@ function getDonationById($id) {
     return fetchOne($query, [$id]);
 }
 
+// FIND createDonation function (around line 290-300) and REPLACE with:
 function createDonation($data) {
-    $query = "INSERT INTO Donations (donation_type, amount, in_kind_details, donation_date, user_id) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO Donations (user_id, shelter_id, donation_type, amount, in_kind_details, donation_date) 
+              VALUES (?, ?, ?, ?, ?, ?)";
     return executeQuery($query, [
+        $data['user_id'],
+        $data['shelter_id'],
         $data['donation_type'],
         $data['amount'] ?: null,
-        $data['in_kind_details'],
-        $data['donation_date'],
-        $data['user_id']
+        $data['in_kind_details'] ?: null,
+        $data['donation_date']
     ]);
 }
 
+// FIND updateDonation function (around line 305-315) and REPLACE with:
 function updateDonation($id, $data) {
-    $query = "UPDATE Donations SET donation_type = ?, amount = ?, in_kind_details = ?, donation_date = ?, user_id = ? WHERE donation_id = ?";
+    $query = "UPDATE Donations 
+              SET user_id = ?, shelter_id = ?, donation_type = ?, amount = ?, in_kind_details = ?, donation_date = ? 
+              WHERE donation_id = ?";
     return executeQuery($query, [
+        $data['user_id'],
+        $data['shelter_id'],
         $data['donation_type'],
         $data['amount'] ?: null,
-        $data['in_kind_details'],
+        $data['in_kind_details'] ?: null,
         $data['donation_date'],
-        $data['user_id'],
         $id
     ]);
 }
-
 function deleteDonation($id) {
     return executeQuery("DELETE FROM Donations WHERE donation_id = ?", [$id]);
 }
@@ -314,20 +322,24 @@ function getWaitlistById($id) {
 }
 
 function createWaitlistEntry($data) {
-    $query = "INSERT INTO Waitlist (user_id, expected_start_date, request_date, status, notes) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO Waitlist (user_id, shelter_id, expected_start_date, request_date, status, notes) VALUES (?, ?, ?, ?, ?, ?)";
     return executeQuery($query, [
         $data['user_id'],
+        $data['shelter_id'],
         $data['expected_start_date'] ?: null,
         $data['request_date'],
-        $data['status'],
+        $data['status'] ?? 'Waiting',
         $data['notes']
     ]);
 }
 
+// REPLACE the updateWaitlistEntry function (around line 327-337) with this:
+
 function updateWaitlistEntry($id, $data) {
-    $query = "UPDATE Waitlist SET user_id = ?, expected_start_date = ?, request_date = ?, status = ?, notes = ? WHERE waitlist_id = ?";
+    $query = "UPDATE Waitlist SET user_id = ?, shelter_id = ?, expected_start_date = ?, request_date = ?, status = ?, notes = ? WHERE waitlist_id = ?";
     return executeQuery($query, [
         $data['user_id'],
+        $data['shelter_id'],
         $data['expected_start_date'] ?: null,
         $data['request_date'],
         $data['status'],
@@ -342,20 +354,9 @@ function deleteWaitlistEntry($id) {
 
 // ============ UTILITY FUNCTIONS ============
 
-function formatDate($date) {
-    if (!$date) return 'N/A';
-    return date('M d, Y', strtotime($date));
-}
 
-function formatCurrency($amount) {
-    if ($amount === null) return 'N/A';
-    return '$' . number_format($amount, 2);
-}
 
-function sanitizeInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+
+
+
 ?>

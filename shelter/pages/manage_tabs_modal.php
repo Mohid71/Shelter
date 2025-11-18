@@ -6,7 +6,13 @@
         <button class="btn btn-add" onclick="openModal('residentModal')">Add New Resident</button>
     <?php endif; ?>
 
-    <table>
+    <!-- Search Filter -->
+    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+        <label>Search Residents:</label>
+        <input type="text" id="filterResidents" placeholder="Search by name, shelter..." onkeyup="searchTable('filterResidents', 'residentsTable')" style="width: 100%; max-width: 400px;">
+    </div>
+
+    <table id="residentsTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -50,7 +56,13 @@
         <button class="btn btn-add" onclick="openModal('volunteerModal')">Add New Volunteer</button>
     <?php endif; ?>
 
-    <table>
+    <!-- Search Filter -->
+    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+        <label>Search Volunteers:</label>
+        <input type="text" id="filterVolunteers" placeholder="Search by name, shelter, task..." onkeyup="searchTable('filterVolunteers', 'volunteersTable')" style="width: 100%; max-width: 400px;">
+    </div>
+
+    <table id="volunteersTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -91,7 +103,13 @@
         <button class="btn btn-add" onclick="openModal('mealModal')">Add New Meal</button>
     <?php endif; ?>
 
-    <table>
+    <!-- Search Filter -->
+    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+        <label>Search Meals:</label>
+        <input type="text" id="filterMeals" placeholder="Search by date, type, shelter..." onkeyup="searchTable('filterMeals', 'mealsTable')" style="width: 100%; max-width: 400px;">
+    </div>
+
+    <table id="mealsTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -131,7 +149,13 @@
     
     <button class="btn btn-add" onclick="openModal('donationModal')">Add New Donation</button>
 
-    <table>
+    <!-- Search Filter -->
+    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+        <label>Search Donations:</label>
+        <input type="text" id="filterDonations" placeholder="Search by user, type, date..." onkeyup="searchTable('filterDonations', 'donationsTable')" style="width: 100%; max-width: 400px;">
+    </div>
+
+    <table id="donationsTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -171,7 +195,13 @@
     
     <button class="btn btn-add" onclick="openModal('waitlistModal')">Add New Waitlist Entry</button>
 
-    <table>
+    <!-- Search Filter -->
+    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+        <label>Search Waitlist:</label>
+        <input type="text" id="filterWaitlist" placeholder="Search by user, status, date..." onkeyup="searchTable('filterWaitlist', 'waitlistTable')" style="width: 100%; max-width: 400px;">
+    </div>
+
+    <table id="waitlistTable">
         <thead>
             <tr>
                 <th>ID</th>

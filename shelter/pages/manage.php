@@ -138,6 +138,7 @@ $waitlist = getAllWaitlist();
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
+<script src="../assets/js/search.js"></script>
     <div class="header">
         <h1>Shelter Management System</h1>
         <div class="nav">
@@ -178,7 +179,13 @@ $waitlist = getAllWaitlist();
                 <button class="btn btn-add" onclick="openModal('shelterModal')">Add New Shelter</button>
             <?php endif; ?>
 
-            <table>
+            <!-- Search Filter -->
+            <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+                <label>Search Shelters:</label>
+                <input type="text" id="filterShelters" placeholder="Search by name, city, address..." onkeyup="searchTable('filterShelters', 'sheltersTable')" style="width: 100%; max-width: 400px;">
+            </div>
+
+            <table id="sheltersTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -224,7 +231,13 @@ $waitlist = getAllWaitlist();
                 <button class="btn btn-add" onclick="openModal('bedModal')">Add New Bed</button>
             <?php endif; ?>
 
-            <table>
+            <!-- Search Filter -->
+            <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e2e8f0;">
+                <label>Search Beds:</label>
+                <input type="text" id="filterBeds" placeholder="Search by room, shelter..." onkeyup="searchTable('filterBeds', 'bedsTable')" style="width: 100%; max-width: 400px;">
+            </div>
+
+            <table id="bedsTable">
                 <thead>
                     <tr>
                         <th>ID</th>

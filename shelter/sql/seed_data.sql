@@ -1,3 +1,4 @@
+-- Sample Data for Shelter Management System
 USE shelter_db;
 
 -- Insert Users (password is 'password123' hashed with PASSWORD())

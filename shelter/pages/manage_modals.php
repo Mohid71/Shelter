@@ -152,6 +152,16 @@
                 <?php endforeach; ?>
             </select>
             
+            <label>Shelter: *</label>
+            <select name="shelter_id" required>
+                <option value="">Select Shelter</option>
+                <?php foreach ($shelters as $shelter): ?>
+                    <option value="<?php echo $shelter['shelter_id']; ?>">
+                        <?php echo htmlspecialchars($shelter['shelter_name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            
             <label>Donation Type: *</label>
             <select name="donation_type" required>
                 <option value="">Select Type</option>
@@ -188,6 +198,16 @@
                 <?php foreach ($users as $user): ?>
                     <option value="<?php echo $user['user_id']; ?>">
                         <?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            
+            <label>Shelter: *</label>
+            <select name="shelter_id" required>
+                <option value="">Select Shelter</option>
+                <?php foreach ($shelters as $shelter): ?>
+                    <option value="<?php echo $shelter['shelter_id']; ?>">
+                        <?php echo htmlspecialchars($shelter['shelter_name']); ?>
                     </option>
                 <?php endforeach; ?>
             </select>

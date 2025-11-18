@@ -72,8 +72,9 @@ $myVolunteer = $conn->query("
 ")->fetch_all(MYSQLI_ASSOC);
 
 $myWaitlist = $conn->query("
-    SELECT w.*, w.request_date, w.status, w.notes
+    SELECT w.*, w.request_date, w.status, w.notes, s.shelter_name
     FROM Waitlist w
+    LEFT JOIN Shelters s ON w.shelter_id = s.shelter_id
     WHERE w.user_id = $currentUserId
     ORDER BY w.request_date DESC
 ")->fetch_all(MYSQLI_ASSOC);
@@ -184,6 +185,7 @@ $conn->close();
                     <thead>
                         <tr>
                             <th>Request Date</th>
+                            <th>Preferred Shelter</th>
                             <th>Status</th>
                             <th>Notes</th>
                         </tr>
@@ -192,6 +194,7 @@ $conn->close();
                         <?php foreach ($myWaitlist as $wait): ?>
                             <tr>
                                 <td><?php echo $wait['request_date']; ?></td>
+                                <td><?php echo htmlspecialchars($wait['shelter_name'] ?? 'Not specified'); ?></td>
                                 <td><?php echo $wait['status']; ?></td>
                                 <td><?php echo htmlspecialchars($wait['notes'] ?? 'N/A'); ?></td>
                             </tr>
@@ -277,18 +280,21 @@ $conn->close();
             <form method="POST">
                 <input type="hidden" name="action" value="request_bed">
                 
-                <label>Status: *</label>
-                <select name="status" required>
-                    <option value="Waiting">Waiting</option>
-                    <option value="Offered">Offered</option>
-                    <option value="Accepted">Accepted</option>
+                <label>Preferred Shelter: *</label>
+                <select name="shelter_id" required>
+                    <option value="">-- Select Shelter --</option>
+                    <?php foreach ($shelters as $shelter): ?>
+                        <option value="<?php echo $shelter['shelter_id']; ?>">
+                            <?php echo htmlspecialchars($shelter['shelter_name']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
                 
                 <label>Request Date: *</label>
                 <input type="date" name="request_date" required value="<?php echo date('Y-m-d'); ?>">
                 
                 <label>Notes:</label>
-                <textarea name="notes" rows="3"></textarea>
+                <textarea name="notes" rows="3" placeholder="Any special requests or requirements..."></textarea>
                 
                 <button type="submit">Submit Request</button>
             </form>
